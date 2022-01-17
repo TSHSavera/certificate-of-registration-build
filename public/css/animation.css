@@ -1,0 +1,34 @@
+/*Animation.css*/
+
+/*Classes*/
+.an-fi {
+    animation: fi 0.5s ease-in;
+}
+.an-sid {
+    animation: sid 0.5s;
+}
+.an-sou {
+    animation: sou 0.5s;
+}
+.an-sil-a {
+    animation: sil-a 0.5s;
+}
+
+
+/*Keyframes*/
+@keyframes fi {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes sid {
+    0% {opacity: 0; top: -300px}
+    100% {opacity: 1; top: 60px;}
+}
+@keyframes sou {
+    0% {opacity: 1; top:60px}
+    100% {opacity: 0; top: -300px}
+}
+@keyframes sil-a {
+    0% {opacity: 0; left: -300px}
+    100% {opacity: 1; left: 2%;}
+}

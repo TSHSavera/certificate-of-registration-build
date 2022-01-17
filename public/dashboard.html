@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="fa/css/all.css">
+    <script defer src="fa/js/all.js"></script>
+    
+    <title>Certificate of Registration</title>
+    <!--Firebase-->
+    <script defer src="js/parameter.js"></script>
+    <script type="module" defer src="js/firebase-app-dashboard.js"></script>
+
+    
+  </head>
+    <body class="ms">
+        <div class="sidenav">
+            <div class="sn-menu">
+                <span class="ms menu-txt">Menu</span>
+                <button class="sn-btn" id="btn-ov"><i class="fas fa-sliders-h"></i> <span>Overview</span></button>
+                <button class="sn-btn" id="btn-cc"><i class="fas fa-question"></i> <span>Concerns</span></button>
+                <button class="sn-btn" id="btn-admin"><i class="fas fa-minus-square"></i> <span>Admin</span></button>
+                <button class="sn-btn" id="btn-as"><i class="fas fa-cog"></i> <span>Settings</span></button>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="topnav">
+                <button class="tn" id="sn-op-btn">
+                    <div class="logo-1"><i class="fa fa-bars"></i></div>
+                    <div class="logo-2"><i class="fa fa-chevron-left"></i></div>
+                    <span id="tn-tt" class="ms">Title Text</span>
+                </button>
+                <div class="tn"></div>
+                <div class="tn u-prof">
+                    <button class="u-n-btn"><i class="fas fa-bell"></i></button>
+                    <button class="u-info">
+                        <i class="fas fa-user"></i>
+                        <span class="username">Name</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="user-info-wrapper">
+                <div class="user-info-main an-sid" id="uim">
+                    <div class="logged-user">
+                        <div class="lu-item">
+                            <i class="fas fa-user"></i>
+                            <span class="username">Name</span>
+                        </div>
+                        <div class="lu-item">
+                            <span class="uid">131354387451355</span>
+                        </div>
+                    </div>
+                    <div class="user-buttons">
+                        <button class="ub-btn" id="ub-ui">User Info</button>
+                        <button class="ub-btn" id="logout">Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notif-wrapper">
+                <div class="notif-main an-sid" id="nm">
+                    <h4>Notifications</h4>
+                    <div class="notif-item-container">
+                        <span>There are no notifications</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--Main Container-->
+            <div class="overview an-fi">
+                <div class="heading">
+                    <h1>Welcome, <span class="username">User</span></h1>
+                    <span>Here's the overview of all data.</span>
+                </div>
+                <div class="data-1-grid">
+                    <div class="d1-g">
+                        <div class="d1-g-g">
+                            <div class="progress-b-c">
+                                <div class="pg-b">
+                                    <div class="inner"></div>
+                                    <div class="number">100%</div>
+                                    <div class="circle">
+                                      <div class="bar left">
+                                        <div class="pg"></div>
+                                      </div>
+                                      <div class="bar right">
+                                        <div class="pg"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="data-info">
+                                <span>Concerns</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d1-g">
+                        <div class="d1-g-g">
+                            <div class="progress-b-c">
+                                <div class="pg-b">
+                                    <div class="inner"></div>
+                                    <div class="number">100%</div>
+                                    <div class="circle">
+                                      <div class="bar left">
+                                        <div class="pg"></div>
+                                      </div>
+                                      <div class="bar right">
+                                        <div class="pg"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="data-info">
+                                <span>Concerns Responded</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d1-g">
+                        <div class="d1-g-g">
+                            <div class="progress-b-c">
+                                <div class="pg-b">
+                                    <div class="inner"></div>
+                                    <div class="number">100%</div>
+                                    <div class="circle">
+                                      <div class="bar left">
+                                        <div class="pg"></div>
+                                      </div>
+                                      <div class="bar right">
+                                        <div class="pg"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="data-info">
+                                <span>Concerns viewed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d1-g">
+                        <div class="d1-g-g">
+                            <div class="progress-b-c">
+                                <div class="pg-b">
+                                    <div class="inner"></div>
+                                    <div class="number">100%</div>
+                                    <div class="circle">
+                                      <div class="bar left">
+                                        <div class="pg"></div>
+                                      </div>
+                                      <div class="bar right">
+                                        <div class="pg"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="data-info">
+                                <span>Concerns Replied</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-2-grid">
+                    <div class="heading">
+                        <h2>Recent Concerns</h2>
+                        <span>Here is the list of recent concern received from past hour</span>
+                    </div>
+                    <div class="d2-g">
+                        <div class="d2-g-h">
+                            <button class="d2-t-h d2th-s"><i class="fas fa-chevron-down"></i> <span>Name</span></button>
+                            <button class="d2-t-h"><i class="fas fa-chevron-down"></i> <span>Date</span></button>
+                            <button class="d2-t-h"><i class="fas fa-chevron-down"></i> <span>Course/Section</span></button>
+                            <button class="d2-t-h"><i class="fas fa-chevron-down"></i> <span>Email</span></button>
+                            <button class="d2-t-h d2th-e"><i class="fas fa-chevron-down"></i> <span>ID</span></button>
+                        </div>
+                        <div class="d2-g-t">
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div><div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+                            <div class="d2-g-d">
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concerns an-fi">
+                <h1>Concerns</h1>
+                <span>Here's the full list of concerns</span>
+
+                <div class="data-3-grid">
+                    <div class="d3-g-list">
+                        <div class="d3-g-load">
+                            Loading concerns...
+                        </div>
+                        <div class="d3-g-none">
+                            There are no concerns at the moment
+                        </div>
+                        <div class="d3-g-item" role="button" tabindex="0" aria-pressed="false">
+                            <p>Name: <span class="con-name">Juan Dela Cruz</span></p>
+                            <p>Email: <span class="con-email">juandelacruz@gmail.com</span></p>
+                            <p>Course: <span class="con-course">12 - STEM</span></p>
+                            <p>Section: <span class="con-section">A</span></p>
+                            <p>Concern ID: <span class="con-id">dsa132wqe879</span></p>
+                            <p>COR Number: <span class="cor-no">ugawgawgaga</span></p>
+                        </div>
+                        <div class="d3-g-item" role="button" tabindex="0" aria-pressed="false">
+                            <p>Name: <span class="con-name">Juan Dela Cruz</span></p>
+                            <p>Email: <span class="con-email">juandelacruz@gmail.com</span></p>
+                            <p>Course: <span class="con-course">12 - STEM</span></p>
+                            <p>Section: <span class="con-section">A</span></p>
+                            <p>Concern ID: <span class="con-id">dsa132wqe879</span></p>
+                            <p>COR Number: <span class="con-no">ugawgawgaga</span></p>
+                        </div>
+                    </div>
+
+                    <div class="d3-g-field">
+                        <div class="d3-g-f-h">
+                            <h3>Form Preview</h3>
+                        </div>
+                        <div class="d3-g-f-r-d">
+                            <div class="d3-g-f-r-d-field">
+                                <h4>Name</h4>
+                                <input type="text" id="pv-name" disabled>
+                            </div>
+                            <div class="d3-g-f-r-d-field">
+                                <h4>Email</h4>
+                                <input type="email" id="pv-email" disabled>
+                            </div>
+                            <div class="d3-g-f-r-d-field">
+                                <h4>Course</h4>
+                                <input type="text" id="pv-course" disabled>
+                            </div>
+                            <div class="d3-g-f-r-d-field">
+                                <h4>Section</h4>
+                                <input type="text" id="pv-section" disabled>
+                            </div>
+                        </div>
+                        <div class="d3-g-f-r-b">
+                            <h4>Concern</h4>
+                            <textarea name="Concern" id="pv-concern" disabled></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="admin an-fi">
+                <h1>Admin Control Center</h1>
+                <div class="data-4-grid">
+                    <div class="d4-g-l">
+                        <span><b>Link COR and Student Number</b></span><br>
+                        <span>This should allow the PDF file of the COR and COR number to be linked </span>
+                        <form class="lcsn-form" action="javascript:void(0)" id="lcsn">
+                            <input type="number" placeholder="COR Number" name="cor" id="cor-nos">
+                            <input type="number" placeholder="Student Number" name="student-number" id="stud-nos">
+                            <input type="button" value="Link" id="lcsn-link">
+                        </form>
+                    </div>
+                    <div class="d4-g-c" action="javascript:void(0)">
+                        <span><b>Create Admin Account</b></span><br>
+                        <span class="caa-subtitle">Take note that you'll be signed out once registration is successful to re-login.</span>
+                        <form class="caa-form" action="javascript:void(0)" id="caa">
+                            <input type="text" id="caa-email" placeholder="Email">
+                            <input type="password" id="caa-pass" placeholder="Password">
+                            <input type="password" id="caa-cpass" placeholder="Confirm Password">
+                            <input type="button" value="Submit" id="caa-submit">
+                            <input type="button" value="Clear Form" id="caa-clear">
+                        </form>
+                    </div>
+                    <div class="d4-g-s">
+                        <span><b>CoR Lookup</b></span><br>
+                        <span>Lookup for students data by entering his/her CoR Number</span>
+                        <form action="javascript:void(0)" id="scf" class="sc-form">
+                            <input type="number" placeholder="CoR Number" id="sc-cors">
+                            <input type="button" value="Search" id="sc-cors-btn">
+                        </form>
+                        <br>
+                        <span><b>Concern Lookup</b></span><br>
+                        <span>Lookup for students specific concern by entering his/her CoR Number and Concern ID</span>
+                        <form action="javascript:void(0)" id="scornf" class="scorn-form">
+                            <input type="number" placeholder="CoR Number" id="scorn-cors">
+                            <input type="text" placeholder="Concern ID" id="scorn-id">
+                            <input type="button" value="Search" id="scorn-btn">
+                        </form>
+                    </div>
+                    <div class="d4-g-reg">
+                        <span><b>Register Student Info</b></span><br>
+                        <span>You can register a student info here for future references. Take note that once you've re-entered an already existing COR Number, data on the server will be overwritten.</span>
+                        <form action="javascript:void(0)" class="rsi-form" name="rsi" id="rsif">
+                            <input type="text" placeholder="Full Name (Surname, Given Name, Middle Name, Suffix (Use letters))" name="Name" id="rsif-name" required>
+                            <input type="email" placeholder="Email (Must be a BulSu email - @bulsu.edu.ph)" name="Email" id="rsif-email" required>
+                            <input type="number" placeholder="COR (Your 9-Digit Registration Number)" name="cor" id="rsif-cor" required>
+                            <input type="text" placeholder="Course - Section (eg. BSIT - A | whitespace sensitve)" name="cs" id="rsif-cs" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
+                            <input type="number" placeholder="Contact Number (Optional | eg. 09123456789)" name="cn" id="rsif-cn">
+                            <input type="button" value="Register Info" id="rsif-submit">
+                        </form>
+                    </div>
+                    <div class="d4-g-ursi">
+                        <span><b>Update Student Info</b></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings an-fi">
+                <h1>Settings</h1>
+                <div class="settings-main-container">
+                    <div class="smc-grid-1">
+                        <h3>Verify Email</h3>
+                        <span>Is verified? <span id="smc-avs">false</span></span>
+                        <button class="smc-avsn-btn">Verify Now</button>
+                    </div>
+                    <div class="smc-grid-2">
+                        <h3>Change Password</h3>
+                        <form id="cpf" action="javascript:void(0)" class="cp-form">
+                            <input type="password" name="Old Password" id="cp-old-pass" placeholder="Old Password">
+                            <input type="password" name="New Password" id="cp-new-pass" placeholder="New Password">
+                            <input type="password" name="Confirm Password" id="cp-cnew-pass" placeholder="Confirm New Password">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+
+
+        <div class="ac-base an-sil-a">
+            <div class="ac-b-head">
+                <button id="ac-close"><i class="fas fa-window-close"></i></button>
+                <span id="ac-title">Custom Alerts</span>
+            </div>
+            <div class="ac-b-body">
+                <p id="ac-msg">Test message for a custom alert</p>
+            </div>
+            <div class="ac-b-footer">
+                <span>Alert <b><span id="nua">1</span></b> of <b><span id="tnua">1</span></b> </span>
+            </div>
+        </div>
+
+        
+
+        <script defer src="js/customalerts.js"></script>
+        <script defer src="js/dashboard.js"></script>
+    </body>
+</html>
