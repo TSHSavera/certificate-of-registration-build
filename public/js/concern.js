@@ -320,7 +320,7 @@ function checkStudentForm (fname, mname, lname, email, cor, cs, sec, cn, concern
                             //Check concern if it exceeds for atleast 20 Characters
                             if(checkValueLengths(concern.value, 20, 0) === true) {
                                 //Submit values to firestore
-                                submitToDatabase(fname.value, mname.value, lname.value ,email.value, cor.value, cs.value, null, concern.value);
+                                submitToDatabase(fname.value, mname.value, lname.value ,email.value, cor.value, cs.value, sec.value, null, concern.value);
                             } else {
                                 createCustomNotice("20 Characters required!");
                             }
@@ -376,7 +376,7 @@ async function submitToDatabase(fname, mname, lname, email, cor, cs, sec, cn, co
         const errorCode = e.code;
         const errorMessage = e.message;
         console.log(errorCode + " - " + errorMessage);
-        let errorTitle = e.code.substring(5);
+        let errorTitle = "cor_" + e.code;
         createCustomError(errorTitle, errorCode, errorMessage);
     }
 }
@@ -442,9 +442,13 @@ async function openFormPreview(element) {
         ctpe.innerHTML =  data.email;
         ctpc.innerHTML = data.course;
         ctps.innerHTML = data.section;
-        ctpnos.innerHTML = data.contactNumber;  
         ctp.style.display = "block";
         ctpo.style.display = "block";
+        if(data.contactNumber == null) {
+            ctpnos.innerHTML = "null";
+        } else {
+            ctpnos.innerHTML = data.contactNumber; 
+        }
     } else {
         createCustomNotice("No user data found");
     }

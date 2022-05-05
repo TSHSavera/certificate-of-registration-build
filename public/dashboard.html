@@ -19,6 +19,9 @@
     <!--Firebase-->
     <script defer src="js/parameter.js"></script>
     <script type="module" defer src="js/firebase-app-dashboard.js"></script>
+    <!--Error System-->
+    <script defer src="js/error-system.js"></script>
+    <link rel="stylesheet" href="css/error-styles.css">
 
     
   </head>
@@ -303,15 +306,6 @@
             <div class="admin an-fi">
                 <h1>Admin Control Center</h1>
                 <div class="data-4-grid">
-                    <div class="d4-g-l">
-                        <span><b>Link COR and Student Number</b></span><br>
-                        <span>This should allow the PDF file of the COR and COR number to be linked </span>
-                        <form class="lcsn-form" action="javascript:void(0)" id="lcsn">
-                            <input type="number" placeholder="COR Number" name="cor" id="cor-nos">
-                            <input type="number" placeholder="Student Number" name="student-number" id="stud-nos">
-                            <input type="button" value="Link" id="lcsn-link">
-                        </form>
-                    </div>
                     <div class="d4-g-c" action="javascript:void(0)">
                         <span><b>Create Admin Account</b></span><br>
                         <span class="caa-subtitle">Take note that you'll be signed out once registration is successful to re-login.</span>
@@ -454,11 +448,73 @@
             </div>
         </div>
 
+        <div class="filter-list-panel-opac">
+            <div class="filter-list-panel dt-cont-sidenav in-opacity">
+                <div class="flp-head  dt-cont-surface">
+                    <span>Filter Concern List</span>
+                    <button class="flp-close"><i class="fas fa-window-close"></i></button>
+                </div>
+                <div class="flp-grid">
+                    <div class="flp-item">
+                        <label for ="fl-regnos">By Registration Number</label>
+                        <input name="fl-regnos" type="text" placeholder="10-Digit Student Number" id="fl-regnos" maxlength="10" oninput="strictNumber(this.id)">
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="regnos">Filter then Update</button>
+                    </div>
+                    <div class="flp-item">
+                        <label for ="fl-email">By Email</label>
+                        <input name="fl-email" type="email" placeholder="BulSU Email" id="fl-email">
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="email">Filter then Update</button>
+                    </div>
+                    <div class="flp-item">
+                        <label for ="fl-cn">By Contact Number</label>
+                        <input name="fl-cn" type="text" placeholder="Contact Number" id="fl-cn" maxlength="11" oninput="strictNumber(this.id)">
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="cn">Filter then Update</button>
+                    </div>
+                    <div class="flp-item">
+                        <label for="fl-c">By Course</label>
+                            <select name="course" id="fl-cs">
+                                <option value="0">Select course</option>
+                                <option value="FM">FM</option>
+                                <option value="MM">MM</option>
+                                <option value="BE">BE</option>
+                                <option value="BSHH">BSHH</option>
+                                <option value="BSTM">BSTM</option>
+                                <option value="DDGT">DDGT</option>
+                                <option value="EXT">EXT</option>
+                                <option value="CT">CT</option>
+                                <option value="BSIT">BSIT</option>
+                                <option value="BSE">BSE</option>
+                                <option value="BSED">BSED</option>
+                                <option value="BEED">BEED</option>
+                              </select>
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="course">Filter then Update</button>
+                    </div>
+                    <div class="flp-item">
+                        <label for ="fl-ln">By Last Name</label>
+                        <input name="fl-ln" type="text" placeholder="Last Name" id="fl-ln">
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="ln">Filter then Update</button>
+                    </div>
+                    <div class="flp-item">
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="all">Use all filters</button>
+                        <button class="mui-def-btn dt-btn-prima filter-btn" data-filter-id="asc">Oldest Concern First</button>
+                        <button class="mui-def-btn dt-btn-tertia fl-cai">Clear all inputs</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
         
 
         
 
         
         <script defer src="js/dashboard.js"></script>
+        <script type="text/javascript">
+            function strictNumber(id) {
+              let a = document.getElementById(id);
+              a.value = a.value.replace(/[^0-9]/gi, "");
+            }
+          </script>
     </body>
 </html>

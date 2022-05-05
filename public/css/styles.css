@@ -55,6 +55,15 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+input, select {
+  padding: 1em;
+  background-color: #5f3e3e;
+  color: #ecdfde;
+  border-radius: 20px;
+  font-size: 14px;
+  border: none;
+  font-family: "Montserrat";
+}
 
 /*Fonts*/
 .dongle {
@@ -899,12 +908,16 @@ input::-webkit-inner-spin-button {
       height: 100%;
       overflow-y: auto;
     }
-    .ctp-close, .cpp-close {
+    .ctp-close, .cpp-close, .flp-close {
       background-color: transparent;
       color: #ffdad4;
       border: none;
       cursor: pointer;
       float: right;
+      transition: all 0.5s;
+    }
+    .ctp-close:hover, .cpp-close:hover, .flp-close:hover {
+      color: #e87c78;
     }
     .concerns-list-grid {
       display: grid;
@@ -1059,4 +1072,61 @@ input::-webkit-inner-spin-button {
   }
   .cpp-g-c-a-grid p {
     font-weight: 700;
+  }
+  
+  .filter-list-panel-opac {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 7;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .filter-list-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+    width: 50%;
+    height: 70%;
+    border-radius: 20px;
+  }
+  .flp-head {
+    border-radius: 20px 20px 0 0;
+    padding: 1em;
+    font-weight: 700;
+  }
+  .flp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1em;
+    grid-gap: 2em;
+  }
+  .flp-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 0.5em;
+    text-align: center;
+  }
+  .flp-item input {
+    text-align: center;
+  }
+  .flp-item select {
+    padding: 1em;
+    border-radius: 20px;
+    border: none;
+    font-family: "Montserrat";
+    outline: none;
+    transition: all 0.5s;
+  }
+  .flp-add {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0.5em;
   }

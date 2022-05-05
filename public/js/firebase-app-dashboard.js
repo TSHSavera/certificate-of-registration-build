@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-analytics.js";
 import { getAuth , createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js";
-import { doc, getDoc, collection, setDoc, getFirestore, getDocs, addDoc, collectionGroup, query } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import { doc, getDoc, collection, setDoc, getFirestore, getDocs, collectionGroup, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -120,34 +120,19 @@ function createAdminAccount() {
 //Logout
 document.getElementById("logout").addEventListener("click", function () {
   signOut(auth).then(() => {
-    alert("Successfully signed out!");
     clearData();
     window.location.href = "index.html";
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode + " " + errorMessage);
-    alert(errorCode + " " + errorMessage);
+  }).catch((e) => {
+    console.error(e);
+    const errorCode = e.code;
+    const errorMessage = e.message;
+    console.log(errorCode + " - " + errorMessage);
+    let errorTitle = e.code.substring(5);
+    createCustomError(errorTitle, errorCode, errorMessage);
   });
 });
 
-//Link COR to Student Number
-let lscnSub = document.getElementById("lcsn-link");
 
-lscnSub.addEventListener("click", function() {
-  let a = document.getElementById("cor-nos").value;
-  let b = document.getElementById("stud-nos").value;
-  linkLCSN(a, b);
-});
-async function linkLCSN(cor, sn) {
-  try {
-    await setDoc(doc(db, "cor", cor), {
-      sn: sn,
-    }, {merge: true});
-  } catch(e) {
-    console.error(e);
-  }
-} 
 
 //Search
 let scfBtn = document.getElementById("sc-cors-btn");
@@ -423,9 +408,11 @@ function checkValueLengths(value, rlength, rule) {
 
 
 //Get all concern data
-document.querySelector(".update-cl").addEventListener("click", getAllConcernData);
-async function getAllConcernData() {
-  const data = query(collectionGroup(db, "concerns"));
+document.querySelector(".update-cl").addEventListener("click", () => {
+  getAllConcernData("desc");
+});
+async function getAllConcernData(state) {
+  const data = query(collectionGroup(db, "concerns"), orderBy("timestamp", state));
   const querySnapshot =  await getDocs(data);
   querySnapshot.forEach((doc) => {
     console.log(doc.id, '=>', doc.data());
@@ -441,7 +428,7 @@ async function showAllData(documentData, concernID) {
   //Create the element then add the required data to it
   let a = document.createElement("div");
   let b = "<span class='con-name'></span><span class='con-email'></span><span class='con-course'></span><span class='con-section'></span><span class='con-id'></span><span class='con-no'></span>";
-  a.classList.add("d3-g-item", "dt-btn-cont-surface");
+  a.classList.add("d3-g-item", "dt-btn-cont-surface", "in-opacity");
   a.setAttribute("role", "button");
   a.setAttribute("tabindex", "0");
   a.setAttribute("aria-pressed", "false");
@@ -500,7 +487,11 @@ async function openConcernPreviewPanel(element) {
     cppregnos.innerHTML = objData.cor;
     cppc.innerHTML  = objData.course;
     cpps.innerHTML = objData.section;
-    cppcn.innerHTML  = objData.contactNumber;
+    if(objData.contactNumber == null) {
+      cppcn.innerHTML  = "null";
+    } else {
+      cppcn.innerHTML  = objData.contactNumber;
+    }
   } else {
     createCustomNotice("No student data found!");
   }
@@ -600,6 +591,156 @@ async function evaluateIsViewedData(regnos, cid) {
     } else {
       cppgs.innerHTML = "Error";
       createCustomNotice("Unknown Error Occurred!");
+    }
+  }
+}
+
+//Open filter concern panel
+document.querySelector(".filters-cl").addEventListener("click", openFilterConcernPanel);
+function openFilterConcernPanel() {
+  let a = document.querySelector(".filter-list-panel-opac");
+  a.style.display = "block";
+}
+
+//Close filter concern panel
+document.querySelector(".flp-close").addEventListener("click", closeFilterConcernPanel);
+function closeFilterConcernPanel() {
+  let a = document.querySelector(".filter-list-panel-opac");
+  a.style.display = "none";
+}
+document.querySelector(".fl-cai").addEventListener("click", clearAllFilterInputs);
+//Clear all filter inputs
+function clearAllFilterInputs() {
+  let a = document.querySelector(".flp-grid").getElementsByTagName("input");
+  for (var i = 0; i < a.length; i++) {
+    a[i].value = "";
+  }
+  //Clear select
+  let b = document.querySelector("#fl-cs");
+  b.selectedIndex = 0;
+}
+
+//Add event listener to all filter btns
+let fbtn = document.querySelectorAll(".filter-btn");
+for (var i = 0; i < fbtn.length; i++) {
+  fbtn[i].addEventListener("click", event => useFilters(event.currentTarget));
+}
+//Use filters
+async function useFilters(el) {
+  let dfi = el.getAttribute("data-filter-id");
+  if (dfi == "regnos") {
+    const flrn = document.querySelector("#fl-regnos").value;
+    if (checkValueLengths(flrn, 10, 2) == true) {
+      const regnosRef = doc(db, "cor", flrn);
+      const regnosSnap = await getDoc(regnosRef);
+      //Process Data
+      if (regnosSnap.exists()) {
+        const rnrDataQuery = query(collection(db, "cor", flrn, "concerns"));
+        const rnrdqSnapshot = await getDocs(rnrDataQuery);
+        rnrdqSnapshot.forEach((documentrn) => {
+          showAllData(documentrn.data(), documentrn.id);
+        });
+      closeFilterConcernPanel();
+      createCustomNotice("Registration Number (" + flrn +") filter applied. ");
+      } else {
+        createCustomNotice("No data found for registration number: " + flrn);
+      }
+    } else {
+      createCustomNotice("Invalid registration number!");
+    }
+  } else if (dfi == "asc") {
+    getAllConcernData();
+    closeFilterConcernPanel();
+    createCustomNotice("Oldest concern first filter applied");
+  } else if (dfi == "email") {
+    const flemail = document.querySelector("#fl-email").value;
+    if (checkStringRule("emailFormat", flemail) === true) {
+      const emailQuery = query(collection(db, "cor"), where("email", "==", flemail));
+      const emqSnapshot = await getDocs(emailQuery);
+      if (emqSnapshot.size == 0) {
+        createCustomNotice("No data found for email: " + flemail);
+      } else {
+          emqSnapshot.forEach(async (documentE) => {
+          const emqsDataQuery = query(collection(db, "cor", documentE.id, "concerns"));
+          const emqsdqSnapshot = await getDocs(emqsDataQuery);
+          emqsdqSnapshot.forEach((documentERN) => {
+            showAllData(documentERN.data(), documentERN.id);
+          });
+          closeFilterConcernPanel();
+          createCustomNotice("Email (" + flemail +") filter applied. ");
+        });
+      }
+      
+    } else {
+      createCustomNotice("Invalid Email! Please provide a BulSU domain email");
+    }
+  } else if(dfi == "cn") {
+    const flcn = document.querySelector("#fl-cn").value;
+    if(checkValueLengths(flcn, 11, 2) === true) {
+      if (cnValid(flcn) === true) {
+        const cnQuery = query(collection(db, "cor"), where("contactNumber", "==", flcn));
+        const cnqSnapshot = await getDocs(cnQuery);
+        if (cnqSnapshot.size == 0) {
+          createCustomNotice("No data found for mobile number: " + flcn);
+        } else {
+              cnqSnapshot.forEach(async (documentCn) => {
+              const cnqsDataQuery = query(collection(db, "cor", documentCn.id, "concerns"));
+              const cnqsdqSnapshot = await getDocs(cnqsDataQuery);
+                cnqsdqSnapshot.forEach((documentCNRN) => {
+                showAllData(documentCNRN.data(), documentCNRN.id);
+            });
+            closeFilterConcernPanel();
+            createCustomNotice("Mobile Number (" + flcn +") filter applied. ");
+          });
+        }
+      } else {
+        createCustomNotice("Invalid mobile number!");
+      }
+    } else {
+      createCustomNotice("Invalid mobile number!");
+    }
+  } else if (dfi == "course") {
+    const flcs = document.querySelector("#fl-cs").value;
+    if (flcs != "0") {
+      const csQuery = query(collection(db, "cor"), where("course", "==", flcs));
+      const csqSnapshot = await getDocs(csQuery);
+      if (csqSnapshot.size == 0) {
+        createCustomNotice("No data found for course: " + flcs);
+      } else {
+            csqSnapshot.forEach(async (documentCs) => {
+            const csqsDataQuery = query(collection(db, "cor", documentCs.id, "concerns"));
+            const csqsdqSnapshot = await getDocs(csqsDataQuery);
+              csqsdqSnapshot.forEach((documentCSRN) => {
+              showAllData(documentCSRN.data(), documentCSRN.id);
+          });
+          closeFilterConcernPanel();
+          createCustomNotice("Course (" + flcs +") filter applied. ");
+        });
+      }
+    } else {
+      createCustomNotice("Invalid course data!");
+    }
+  } else if (dfi == "ln") {
+    const flln = document.querySelector("#fl-ln").value;
+    console.log(flln);
+    if (checkStringRule("noSC", flln) == true && checkValueLengths(flln, 0, 5) == true) {
+      const lnQuery = query(collection(db, "cor"), where("lname", "==", flln));
+      const lnqSnapshot = await getDocs(lnQuery);
+      if (lnqSnapshot.size == 0) {
+        createCustomNotice("No data found for last name: " + flln);
+      } else {
+            lnqSnapshot.forEach(async (documentLn) => {
+            const lnqsDataQuery = query(collection(db, "cor", documentLn.id, "concerns"));
+            const lnqsdqSnapshot = await getDocs(lnqsDataQuery);
+              lnqsdqSnapshot.forEach((documentLNRN) => {
+              showAllData(documentLNRN.data(), documentLNRN.id);
+          });
+          closeFilterConcernPanel();
+          createCustomNotice("Last name (" + flln +") filter applied. ");
+        });
+      }
+    } else {
+      createCustomNotice("Invalid Last Name!");
     }
   }
 }
