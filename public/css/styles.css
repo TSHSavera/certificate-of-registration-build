@@ -14,7 +14,7 @@ html {
 }
 body {
   margin: 0;
-  font-family: sans-serif, "Dongle", "Darker Grotesque";
+  font-family: "Montserrat", "Darker Grotesque", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -153,43 +153,39 @@ input::-webkit-inner-spin-button {
   height: 100%;
   width: 0;
   z-index: 1;
-  background-color: #630000;
   transition: all 0.5s;
   overflow: hidden;
+  padding-right: 1.5em;
 }
   .sn-menu {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    grid-gap: 1em;
+    grid-gap: 0.5em;
   }
     .sn-btn {
-      padding: 1em;
+      padding: 1em 2em;
       background-color: transparent;
-      color: #EEEBDD;
-      text-align: center;
+      text-align: left;
       cursor: pointer;
       font-weight: 500;
       font-size: 15px;  
       border: none;
       font-family: "Montserrat";
       transition: all 0.4s;
+      color: #ecdfde;
+      border-radius: 0px 20px 20px 0;
     }
-    .sn-btn:hover, .sn-btn-active {
-      background-color: #EEEBDD;
-      color: #810000;
-    }
+
     .menu-txt {
       margin: 1em;
       font-weight: bold;
-      text-align: center;
+      text-align: left;
     }
 
 .dashboard {
   width: 100%;
   transition: all 0.5s;
-  background-color: #EEEBDD;
-  color: #810000;
 }
   .topnav {
     position: sticky;
@@ -197,8 +193,6 @@ input::-webkit-inner-spin-button {
     left: 0;
     width: 100%;
     height: 7%;
-    background-color: #EEEBDD;
-    color: #810000;
     display: grid;
     grid-template-columns: 1fr 5fr 3fr;
     z-index: 5;
@@ -215,7 +209,7 @@ input::-webkit-inner-spin-button {
         align-self: center;
         justify-self: end;
         padding: 0.5em;
-        color: #810000;
+        color: #ecdfde;
         transition: all 0.5s;
       }
       .u-n-btn:hover, .u-info:hover {
@@ -238,7 +232,7 @@ input::-webkit-inner-spin-button {
       border-radius: 10px;
       cursor: pointer;
       padding: 0.5em;
-      color: #810000;
+      color: #ecdfde;
     }
     .tn #tn-tt {
       font-size: 16px;
@@ -249,7 +243,7 @@ input::-webkit-inner-spin-button {
       grid-template-columns: 1fr 2fr;
       background-color: transparent;
       border: none;
-      color: #810000;
+      color: #ecdfde;
       align-items: center;
       font-size: 12px;
       font-family: "Montserrat";
@@ -270,7 +264,6 @@ input::-webkit-inner-spin-button {
         position: fixed;
         top: 60px;
         right: 30px;
-        background-color: #ede3bd;
         padding: 1em;
         width: 25%;
         height: auto;
@@ -289,15 +282,10 @@ input::-webkit-inner-spin-button {
         width: 100%;
         border-radius: 10px;
         border: none;
-        background-color: #630000;
-        color: #EEEBDD;
         padding: 1em;
         cursor: pointer;
         margin-bottom: 10px;
         transition: all 0.5s;
-      }
-      .ub-btn:hover {
-        background-color: #810000;
       }
       .uid {
         font-size: 10px;
@@ -473,8 +461,8 @@ input::-webkit-inner-spin-button {
     .d3-g-list {
       display: grid;
       grid-template-rows: auto;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-gap: 1em;
+      grid-template-columns: 1fr;
+      grid-gap: 0.5em;
     }
       .d3-g-f-r-d {
         display: grid;
@@ -507,19 +495,28 @@ input::-webkit-inner-spin-button {
           border-radius: 10px;
         }
       .d3-g-item {
-        background-color: #f3e9c1;
         padding: 1em;
         border-radius: 10px;
         font-size: 12px;
         cursor: pointer;
         transition: all 0.5s;
+        display: grid;
+        grid-template-columns: 1.5fr 1.5fr 0.5fr 0.5fr 1.5fr 1fr;
+        justify-items: center;
       }
-      .d3-g-item:hover {
-        background-color: #ede3bd;
+      .d3-g-label {
+        padding: 1em;
+        font-size: 12px;
+        display: grid;
+        grid-template-columns: 1.5fr 1.5fr 0.5fr 0.5fr 1.5fr 1fr;
+        font-weight: bold;
+        justify-items: center;
       }
-      
       .d3-g-item p {
         margin: 0;
+      }
+      .d3-g-load, .d3-g-none {
+        display: none;
       }
 
   .admin {
@@ -648,7 +645,7 @@ input::-webkit-inner-spin-button {
   input[type="button"] {
     transition: all 0.5s;
   }
-  input[type="button"]:hover {
+  .scorn-form input[type="button"]:hover {
     background-color: #630000;
   }
 
@@ -722,15 +719,28 @@ input::-webkit-inner-spin-button {
   }
 
 /*Concerns.html*/
-.concern-main-container, .concern-preview-container {
-  display: block;
-  color: #810000;
+.concern-main-container  {
   font-family: "Montserrat";
   padding: 1.5em;
-  width: 50%;
+  width: 85%;
   margin: auto;
   text-align: center;
+  position: relative;
 }
+.concern-preview-container {
+  display: none;
+}
+.concern-main-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 3em;
+}
+  .cmc-head-text {
+    text-align: left;
+    position: sticky;
+    top: 3%;
+    align-self: start;
+  }
   .cmc-head-text span {
     font-size: 14px;
   }
@@ -745,51 +755,45 @@ input::-webkit-inner-spin-button {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     grid-gap: 1em;
+    text-align: left;
   }
-    .cmc-grid-1 input {
+    .cmc-grid-1 label {
+      font-weight: 700;
+    }
+    .cmc-grid-1 input, .cmc-grid-1 select {
       padding: 1em;
-      border-radius: 10px;
+      border-radius: 20px;
       border: none;
       font-family: "Montserrat";
       outline: none;
       transition: all 0.5s;
     }
     .cmc-grid-1 input:focus, .cmc-grid-1 textarea:focus {
-      border: 1px solid #630000;
+      outline: 1px solid #630000;
     }
     .cmc-grid-1 input[name="cn"] {
       background-color: #ebe2b9;
     }
-    .cmc-grid-1 input[type="button"], #concern-index {
-      background-color: #b33030;
+    .cmc-grid-1 input[type="button"] {
       padding: 1em;
-      border-radius: 10px;
-      border: none;
+      border-radius: 20px;
+      border: 1px solid #7e2a2c;
       font-family: "Montserrat";
-      color: #EEEBDD;
       cursor: pointer;
       transition: all 0.5s;
       font-weight: 700;
-    }
-    .cmc-grid-1 input[type="button"]:hover {
-      background-color: #630000;
     }
     .cmc-grid-1 input[type="submit"]{
       padding: 1em;
-      border-radius: 10px;
+      border-radius: 20px;
       border: none;
       font-family: "Montserrat";
-      background-color: #810000;
-      color: #EEEBDD;
       cursor: pointer;
       transition: all 0.5s;
       font-weight: 700;
     }
-    .cmc-grid-1 input[type="submit"]:hover {
-      background-color: #630000;
-    }
     .cmc-grid-1 textarea {
-      border-radius: 10px;
+      border-radius: 20px;
       border: none;
       padding: 1em;
       resize: none;
@@ -804,4 +808,255 @@ input::-webkit-inner-spin-button {
     
     #concern-index {
       margin-top: 2em;
+      padding: 1em;
+      border: none;
+      border-radius: 20px;
+      font-family: "Montserrat";
+      cursor: pointer;
+      transition: all 0.5s;
+      font-weight: 700;
     }
+    .cmc-head-text button {
+      width: 100%;
+      padding: 1em;
+      border-radius: 20px;
+      border: none;
+      font-family: "Montserrat";
+      cursor: pointer;
+      transition: all 0.5s;
+      font-weight: 700;
+      margin-top: 1em;
+    }
+    .sn-b2, .sn-b4 {
+      display: none;
+    }
+    .concern-list {
+      text-align: left;
+      display: none;
+    }
+    .concern-item, .concern-item-head {
+      padding: 1em;
+      border-radius: 20px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 2fr;
+      justify-items: center;
+      grid-gap: 1em;
+    }
+    .concern-item {
+      cursor: pointer;
+    }
+
+    .concern-text-preview-opac {
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: none;
+    }
+    .concern-text-preview {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      padding: 1.5em;
+      border-radius: 20px;
+      display: none;
+    }
+    .ctp-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-gap: 2em;
+    }
+    .concern-text-preview p {
+      font-weight: 700;
+      margin-bottom: 0.5em;
+    }
+    .concern-text-preview span {
+      font-weight: 400;
+    }
+    .ctp-g-bi-container {
+      margin-top: 1em;
+      font-size: 14px;
+    }
+    .ctp-g-bi-container div, .ctp-g-concern div {
+      padding: 0.5em 1em;
+      background-color: white;
+      color: black;
+      border-radius: 20px;
+    }
+    .ctp-g-concern {
+      margin-top: 1em;
+      font-size: 14px;
+    }
+    .ctp-g-concern div {
+      height: 300px
+    }
+    .ctp-concern {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .ctp-close, .cpp-close {
+      background-color: transparent;
+      color: #ffdad4;
+      border: none;
+      cursor: pointer;
+      float: right;
+    }
+    .concerns-list-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 1em;
+    }
+    .concern-item p {
+      margin: 0;
+    }
+    .cl-fetch-screen {
+      text-align: center;
+      display: none;
+    }
+
+    .update-cl, .filters-cl {
+      padding: 1em;
+      border-radius: 20px;
+      border: none;
+      float: right;
+      cursor: pointer;
+      transition: all 0.5s;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      margin-left: 1em;
+    }
+
+
+  .concern-preview-panel-opac {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 5;
+  }
+  .concern-preview-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 95%;
+    z-index: 6;
+    padding: 1.5em;
+    border-radius: 20px;
+  }
+
+  .pre-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    transition: all 0.5s;
+  }
+  .pre-loader-txt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  /*CPP*/
+  .cpp-g-head {
+    font-weight: 700;
+  }
+  .cpp-g-head span {
+    font-weight: 400;
+  }
+
+  .cpp-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 5em;
+  }
+  .cpp-g-c-d-item:nth-child(1) {
+    grid-area: name;
+  }
+  .cpp-g-c-d-item:nth-child(2) {
+    grid-area: email;
+  }
+  .cpp-g-c-d-item:nth-child(3) {
+    grid-area: regnos;
+  }
+  .cpp-g-c-d-item:nth-child(4) {
+    grid-area: cid;
+  }
+  .cpp-g-c-d-item:nth-child(5) {
+    grid-area: cs;
+  }
+  .cpp-g-c-d-item:nth-child(6) {
+    grid-area: cn;
+  }
+  .cpp-g-c-d-item:nth-child(7) {
+    grid-area: cd;
+  }
+  .cpp-g-c-d-item:nth-child(7) div {
+    overflow-y: auto;
+    max-height: 150px;
+  }
+  .cpp-g-c-d-cl {
+    overflow-y: auto;
+  }
+  .cpp-g-con-data {
+    display: grid;
+    grid-template-areas: 
+    "name name" 
+    "email email"
+    "regnos cid"
+    "cs cn"
+    "cd cd";
+    grid-template-rows: 1fr 1fr 1fr 1fr 150px;
+    grid-template-columns: 1fr 1fr;
+    /*
+    grid-template-columns: repeat(3, 1fr [col1]);
+    grid-template-rows: 1fr 1fr 1fr;
+    */
+    grid-gap: 1em;
+  }
+  
+  .cpp-g-con-actions {
+    text-align: center;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: flex-start;
+  }
+  .cpp-g-c-d-item div{
+    padding: 1em;
+    background-color: #201a1a;
+    color: #ecdfde;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  .cpp-g-c-d-item p{
+    font-weight: 700;
+  }
+  .cpp-g-c-d-cl {
+    height: inherit;
+  }
+  .cpp-g-c-a-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1em;
+  }
+  .cpp-g-c-a-grid p {
+    font-weight: 700;
+  }

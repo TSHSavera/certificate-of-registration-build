@@ -13,6 +13,8 @@ function openSn() {
     let b = document.querySelector(".dashboard");
     let c = document.querySelector(".logo-1");
     let d = document.querySelector(".logo-2");
+    let e = document.querySelectorAll(".sn-btn");
+    let f = document.querySelector(".menu-txt");
     
     if (sn_v == 0) {
         while (sn_v < 1) {
@@ -21,15 +23,30 @@ function openSn() {
             a.style.width = "20%";
             b.style.marginLeft = "20%";
             b.style.width = "80%";
+            f.style.textAlign = "left";
+            for (var i = 0; i < e.length; i++) {
+                e[i].style.padding = "1em 2em";
+                e[i].style.textAlign = "left";
+            }
             sn_v = sn_v + 1;
         }
     }
     else if (sn_v == 1) {
             c.style.display = "block";
             d.style.display = "none";
-            a.style.width = "0";
-            b.style.marginLeft = "0";
-            b.style.width = "100%";
+            a.style.width = "7%";
+            b.style.marginLeft = "7%";
+            b.style.width = "93%";
+            f.style.textAlign = "center";
+            for (var i = 0; i < e.length; i++) {
+                e[i].style.padding = "1em";
+                //tbdb - cc
+                setTimeout(function() {
+                    for (var i = 0; i < e.length; i++) {
+                        e[i].style.textAlign = "center";
+                    }
+                }, 500);
+            }
             sn_v = sn_v - 1;
     }
     else {
@@ -94,12 +111,12 @@ let btns = {
     bcc:document.getElementById("btn-cc"),
     badmn:document.getElementById("btn-admin"),
     bas: document.getElementById("btn-as"),
-}
+};
 
-btns.bov.addEventListener("click", function () {updateState(1)});
-btns.bcc.addEventListener("click", function () {updateState(2)});
-btns.badmn.addEventListener("click", function () {updateState(3)});
-btns.bas.addEventListener("click", function () {updateState(4)});
+btns.bov.addEventListener("click", function () {updateState(1);});
+btns.bcc.addEventListener("click", function () {updateState(2);});
+btns.badmn.addEventListener("click", function () {updateState(3);});
+btns.bas.addEventListener("click", function () {updateState(4);});
 
 let ds;
 
@@ -184,26 +201,26 @@ function ocui() {
     if (sfui == 0 && nfui ==0) {
         while (sfui < 1) {
             a.style.display = "grid";
-            b.style.backgroundColor = "#ede3bd";
-            c.style.color = "#b33030";
+            b.style.backgroundColor = "#362525";
+            c.style.color = "#ecdfde";
             sfui = sfui + 1;
         }
     } else if (sfui == 1) {
         a.style.top = "-300px";
         a.style.opacity = "0";
-        b.style.backgroundColor = "#EEEBDD";
-        c.style.color = "#810000";
+        b.style.backgroundColor = "#201a1a";
+        c.style.color = "#ecdfde";
         setTimeout(function() {
             a.style.display = "none";
             a.style.top = "60px";
-            a.style.opacity = "1";
+            a.style.opacity = "1";  
         }, 500);
         sfui = sfui - 1;
     } else if (sfui == 0 && nfui == 1) {
         ocn();
         a.style.display = "grid";
-        b.style.backgroundColor = "#ede3bd";
-        c.style.color = "#b33030";
+        b.style.backgroundColor = "#362525";
+        c.style.color = "#ecdfde";
         sfui = sfui + 1;
     } else {
         console.log("Loop error");
@@ -220,15 +237,15 @@ function ocn() {
     if (sfui == 0 && nfui ==0) {
         while (nfui < 1) {
             a.style.display = "grid";
-            b.style.backgroundColor = "#ede3bd";
-            c.style.color = "#b33030";
+            b.style.backgroundColor = "#362525";
+            c.style.color = "#ecdfde";
             nfui = nfui + 1;
         }
     } else if (nfui == 1) {
         a.style.top = "-300px";
         a.style.opacity = "0";
-        b.style.backgroundColor = "#EEEBDD";
-        c.style.color = "#810000";
+        b.style.backgroundColor = "#201a1a";
+        c.style.color = "#ecdfde";
         setTimeout(function() {
             a.style.display = "none";
             a.style.top = "60px";
@@ -238,8 +255,8 @@ function ocn() {
     } else if (sfui == 1 && nfui == 0) {
         ocui();
         a.style.display = "grid";
-        b.style.backgroundColor = "#ede3bd";
-        c.style.color = "#b33030";
+        b.style.backgroundColor = "#362525";
+        c.style.color = "#ecdfde";
         nfui = nfui + 1;
     } else {
         console.log("Loop error");
@@ -256,4 +273,4 @@ function clearForm(form) {
 let caaform = document.getElementById("caa");
 let caaclearbtn = document.getElementById("caa-clear");
 
-caaclearbtn.addEventListener("click", function () {clearForm(caaform)})
+caaclearbtn.addEventListener("click", function () {clearForm(caaform);});

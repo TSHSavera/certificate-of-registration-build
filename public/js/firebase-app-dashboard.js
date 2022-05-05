@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-analytics.js";
 import { getAuth , createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js";
-import { doc, getDoc, collection, setDoc, getFirestore, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import { doc, getDoc, collection, setDoc, getFirestore, getDocs, addDoc, collectionGroup, query } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -31,6 +31,7 @@ const db = getFirestore(app);
 //Set a delay so that the firestore can keep up
 onAuthStateChanged(auth, user => {
     if (user != null) {
+      setTimeout(stopPreloader, 500);
       console.log("Logged in");
       console.log(user);
       let userData = user;
@@ -39,15 +40,20 @@ onAuthStateChanged(auth, user => {
       setData(userEmail, userUid);
       //Push to local storage
       localStorage.setItem("username", userEmail);
-      localStorage.setItem("uid", userUid)
+      localStorage.setItem("uid", userUid);
       openSn();
       updateState(3);
     } else {
       console.log("Not Logged In");
-      window.location.href = "index.html?rdrc=aunauth"
+      window.location.href = "index.html?rdrc=aunauth";
     }
-  })
-
+  });
+function stopPreloader() {
+  document.querySelector(".pre-loader").style.opacity = "0";
+  setTimeout(function() {
+    document.querySelector(".pre-loader").style.display = "none";
+  }, 500);
+}
 
 //Authentication
 //Variables
@@ -68,7 +74,7 @@ function createAdminAccount() {
   //Get Field Values then push
   let email = caaEmail.value;
   let password = caaPass.value;
-  let confirmPassword = caaCpass.value
+  let confirmPassword = caaCpass.value;
   let passwordLength = password.length;
 
   if (password === confirmPassword) {
@@ -88,7 +94,7 @@ function createAdminAccount() {
             const errorMessage = error.message;
             console.log(errorCode + " " + errorMessage);
             alert(errorCode + " " + errorMessage);
-          })
+          });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -97,7 +103,7 @@ function createAdminAccount() {
           alert(errorCode + " " + errorMessage);
         });
       } else {
-        console.log("Invalid Email!")
+        console.log("Invalid Email!");
         alert("Please use a valid BulSu email!");
       }
     } else {
@@ -122,8 +128,8 @@ document.getElementById("logout").addEventListener("click", function () {
     const errorMessage = error.message;
     console.log(errorCode + " " + errorMessage);
     alert(errorCode + " " + errorMessage);
-  })
-})
+  });
+});
 
 //Link COR to Student Number
 let lscnSub = document.getElementById("lcsn-link");
@@ -132,7 +138,7 @@ lscnSub.addEventListener("click", function() {
   let a = document.getElementById("cor-nos").value;
   let b = document.getElementById("stud-nos").value;
   linkLCSN(a, b);
-})
+});
 async function linkLCSN(cor, sn) {
   try {
     await setDoc(doc(db, "cor", cor), {
@@ -154,7 +160,7 @@ scfBtn.addEventListener("click", function() {
 });
 scornBtn.addEventListener("click", function() {
   submitSearch("scornf", scornCors.value, scornId.value);
-})
+});
 function submitSearch(type, query, id) {
   if (type == "scf") {
     window.location.href = "search.html?t=" + type + "&q=" + query;
@@ -174,18 +180,18 @@ rsiBtn.addEventListener("click", function() {
   let c = document.getElementById("rsif-cor");
   let d = document.getElementById("rsif-cs");
   let e = document.getElementById("rsif-cn");
-  checkStudentRegistrationInfo(a, b, c, d, e)
-})
+  checkStudentRegistrationInfo(a, b, c, d, e);
+});
 //Perform Checks
-function checkStudentRegistrationInfo (name, email, cor, cs, cn) {
+function checkStudentRegistrationInfo (fname, mname, lname, email, cor, cs, cn) {
   //Check for name length
-  if(checkValueLengths(name.value, 5, 4) === false) {
+  if(checkValueLengths(fname.value, 1, 4) === false && checkValueLengths(mname.value, 1, 4) && checkValueLengths(lname.value, 1, 4) === false) {
       //Check for name characters
-      if(checkStringRule("noSC", name.value) === true) {
+      if(checkStringRule("noSC", fname.value) === true && checkStringRule("noSC", mname.value) === true && checkStringRule("noSC", lname.value) === true) {
           //Check email format
           if(checkStringRule("emailFormat", email.value) === true) {
               //Check cor length
-              if(checkValueLengths(cor.value, 9, 2) === true) {
+              if(checkValueLengths(cor.value, 10, 2) === true) {
                   //Check course - section length
                   if (checkCourseSection(cs.value) === true) {
                       //Check contact number
@@ -193,19 +199,19 @@ function checkStudentRegistrationInfo (name, email, cor, cs, cn) {
                           //Check contact number validity if user submitted one
                           if(cnValid(cn.value) === true) {
                               //Submit values to firestore
-                              registerStudentInfo(name.value, email.value, cor.value, cs.value, cn.value);
+                              registerStudentInfo(fname.value, mname.value, lname.value, email.value, cor.value, cs.value, cn.value);
                           } else {
-                              alert("Invalid contact number!")
+                              alert("Invalid contact number!");
                           }
                           //Check if user doesn't submitted a number
                       } else if(checkValueLengths(cn.value, 0, 2) === true) {
                           //Submit values to firestore
-                          registerStudentInfo(name.value, email.value, cor.value, cs.value, null);
+                          registerStudentInfo(fname.value, mname.value, lname.value, email.value, cor.value, cs.value, null);
                       } else {
                           alert("Invalid contact number!");
                       }
                   } else {
-                      alert("Invalid Course - Section!")
+                      alert("Invalid Course - Section!");
                   }
               } else {
                   alert("Invalid COR!");
@@ -214,18 +220,20 @@ function checkStudentRegistrationInfo (name, email, cor, cs, cn) {
               alert("Invalid email!");
           }
       } else {
-          alert("Invalid name!")
+          alert("Invalid name!");
       }
   } else {
       alert("Invalid name!");
   }
 }
 
-async function registerStudentInfo(name, email, cor, cs, cn) {
+async function registerStudentInfo(fname, mname, lname, email, cor, cs, cn) {
   try {
       //Set Datas 
       await setDoc(doc(db, "cor", cor), {
-      name: name,
+      fname: fname,
+      mname: mname,
+      lname: lname,
       email: email,
       cor: cor,
       courseSection: cs,
@@ -239,18 +247,6 @@ async function registerStudentInfo(name, email, cor, cs, cn) {
       //Custom Alert
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //Validators
@@ -286,7 +282,7 @@ function checkStringRule(rule, stringToBeChecked) {
   var noScFormat = /^[\w\s ,./-]+$/g;
   var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   var test1 = /^((0)(9)([0-9]{9}))/g;
-  var bulsuemail = /@bulsu.edu.ph\s*$/
+  var bulsuemail = /@bulsu.edu.ph\s*$/;
 
   //String Rules
   //Check if given value only consists letters
@@ -376,7 +372,7 @@ function checkValueLengths(value, rlength, rule) {
       if (value.length > rlength) {
           return true;
       } else {
-          return false
+          return false;
       }
   }
   //Rule 1: < 
@@ -400,7 +396,7 @@ function checkValueLengths(value, rlength, rule) {
       if (value.length >= rlength) {
           return true;
       } else {
-          return false
+          return false;
       }
   }
   //Rule 4: <=
@@ -422,5 +418,188 @@ function checkValueLengths(value, rlength, rule) {
   //Unmatched rule
   else {
       console.log("Invalid rule parameter passed");
+  }
+}
+
+
+//Get all concern data
+document.querySelector(".update-cl").addEventListener("click", getAllConcernData);
+async function getAllConcernData() {
+  const data = query(collectionGroup(db, "concerns"));
+  const querySnapshot =  await getDocs(data);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, '=>', doc.data());
+    showAllData(doc.data(), doc.id);
+  });
+}
+
+async function showAllData(documentData, concernID) {
+  //Start showing the loading screen and clearing the previous list
+  startSADLoad();
+  setTimeout(async () => {
+    let d3gl = document.querySelector(".d3-g-list");
+  //Create the element then add the required data to it
+  let a = document.createElement("div");
+  let b = "<span class='con-name'></span><span class='con-email'></span><span class='con-course'></span><span class='con-section'></span><span class='con-id'></span><span class='con-no'></span>";
+  a.classList.add("d3-g-item", "dt-btn-cont-surface");
+  a.setAttribute("role", "button");
+  a.setAttribute("tabindex", "0");
+  a.setAttribute("aria-pressed", "false");
+  a.setAttribute("data-concern-id", concernID);
+  a.setAttribute("data-user-reg-nos", documentData.linkedCor);
+  a.addEventListener("click", event => openConcernPreviewPanel(event.currentTarget));
+  a.innerHTML = b;
+  //Append to parent
+  d3gl.appendChild(a);
+  //Get data from database based on linkedCor
+  const docRef = doc(db, "cor", documentData.linkedCor);
+  const docSnap =  await getDoc(docRef);
+  //Process obtained database
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    //Set values
+    a.children[0].innerHTML = data.fname + " " + data.lname;
+    a.children[1].innerHTML = data.email;
+    a.children[2].innerHTML = data.course;
+    a.children[3].innerHTML = data.section;
+    a.children[4].innerHTML = concernID;
+    a.children[5].innerHTML = data.cor;
+  } else {
+    createCustomError("No User Data found", "COR_NO_DATA_AVAILABLE", "No data is present on the database. Maybe it was corrupted or deleted.");
+  }
+  }, 3000);
+}
+
+
+async function openConcernPreviewPanel(element) {
+  console.log(element);
+  //Get required elements for preview
+  let cppname = document.querySelector(".cpp-g-c-d-name");
+  let cppemail = document.querySelector(".cpp-g-c-d-email");
+  let cppregnos = document.querySelector(".cpp-g-c-d-regnos");
+  let cppcid = document.querySelector(".cpp-g-c-d-cid");
+  let cppc = document.querySelector(".cpp-g-c-d-c");
+  let cpps = document.querySelector(".cpp-g-c-d-s");
+  let cppcn = document.querySelector(".cpp-g-c-d-cn");
+  let cppcl = document.querySelector(".cpp-g-c-d-cl");
+  let cppts = document.querySelector(".cpp-g-ts");
+  //Get attributes
+  let dataA = element.getAttribute("data-concern-id");
+  let dataB = element.getAttribute("data-user-reg-nos");
+  //Obtain student data on the database
+  const docRef = doc(db, "cor", dataB);
+  const docSnap = await getDoc(docRef);
+  //Start processing student data
+  if(docSnap.exists()) {
+    const objData = docSnap.data();
+    //For Dev Purposes
+    console.log(objData);
+    //Set values
+    cppname.innerHTML = objData.fname + " " + objData.mname + " " + objData.lname;
+    cppemail.innerHTML = objData.email;
+    cppregnos.innerHTML = objData.cor;
+    cppc.innerHTML  = objData.course;
+    cpps.innerHTML = objData.section;
+    cppcn.innerHTML  = objData.contactNumber;
+  } else {
+    createCustomNotice("No student data found!");
+  }
+  //Obtain concern data
+  const docRef2 = doc(db, "cor", dataB, "concerns", dataA);
+  const docSnap2 = await getDoc(docRef2);
+  //Start processing concern data
+  if(docSnap2.exists()) {
+    const objData2 = docSnap2.data();
+    //For Dev Purposes
+    console.log(objData2);
+    //Set values
+    cppcid.innerHTML = dataA;
+    cppcl.innerHTML = objData2.concernData;
+    cppts.innerHTML = objData2.timestamp.toDate();
+  } else {
+    createCustomNotice("No concern data found!");
+  }
+  //Change the concern state to viewed once opened
+  try {
+    await setDoc(doc(db, "cor", dataB, "concerns", dataA), {
+      isViewed: true,
+    }, {merge: true});
+  } catch(e) {
+    console.error(e);
+    const errorCode = e.code;
+    const errorMessage = e.message;
+    console.log(errorCode + " - " + errorMessage);
+    let errorTitle = e.code.substring(5);
+    createCustomError(errorTitle, errorCode, errorMessage);
+  }
+  //Evaulate isViewed data
+  evaluateIsViewedData(dataB, dataA);
+  //Push currently opened concern data to storage
+  localStorage.setItem("cppRegNos", dataB);
+  localStorage.setItem("cppCID", dataA);
+  //Show preview panel
+  let cppo = document.querySelector(".concern-preview-panel-opac");
+  cppo.style.display = "block";
+}
+
+function startSADLoad() {
+  let a = document.querySelector(".d3-g-load");
+  let b = document.querySelectorAll(".d3-g-item");
+  a.style.display = "block";
+  b.forEach((e) => {
+    e.style.display = "none";
+    e.remove();
+  });
+  //Return views
+  setTimeout(() => {
+    a.style.display = "none";
+    let c = document.querySelectorAll(".d3-g-item");
+    for (var i = 0; i < c.length; i++) {
+      c[i].style.display = "grid";
+    }
+  }, 3000);
+}
+document.querySelector(".cpp-close").addEventListener("click", closeConcernReviewPanel);
+function closeConcernReviewPanel() {
+  let a = document.querySelector(".concern-preview-panel-opac");
+  a.style.display = "none";
+}
+
+//Mark as unviewed
+document.querySelector(".cpp-mau").addEventListener("click", function() {
+  unviewConcern(localStorage.getItem("cppRegNos"), localStorage.getItem("cppCID"));
+})
+async function unviewConcern(regnos, cid) {
+  try {
+    await setDoc(doc(db, "cor", regnos, "concerns", cid), {
+      isViewed: false,
+    }, {merge: true});
+  } catch(e) {
+    console.error(e);
+    const errorCode = e.code;
+    const errorMessage = e.message;
+    console.log(errorCode + " - " + errorMessage);
+    let errorTitle = e.code.substring(5);
+    createCustomError(errorTitle, errorCode, errorMessage);
+  }
+  evaluateIsViewedData(regnos, cid);
+}
+async function evaluateIsViewedData(regnos, cid) {
+  //Elements
+  let cppgs = document.querySelector(".cpp-g-cs");
+  //Process data
+  const docRef = doc(db, "cor", regnos, "concerns", cid);
+  const docSnap = await getDoc(docRef);
+  if(docSnap.exists()) {
+    const data = docSnap.data();
+    console.log(data);
+    if (data.isViewed === true) {
+      cppgs.innerHTML = "Viewed";
+    } else if (data.isViewed === false) {
+      cppgs.innerHTML = "Unviewed";
+    } else {
+      cppgs.innerHTML = "Error";
+      createCustomNotice("Unknown Error Occurred!");
+    }
   }
 }

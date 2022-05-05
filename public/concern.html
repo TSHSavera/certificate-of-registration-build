@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/scrollbar.css">
     <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/color-scheme.css">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,34 +17,138 @@
     <!-- Firebase SDKs -->
     <script defer src="js/parameter.js"></script>
     <script type="module" defer src="js/concern.js"></script>
-    
+
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="fa/css/all.css">
+    <script defer src="fa/js/all.js"></script>
+
+    <!--Error System Scripts-->
+    <link rel="stylesheet" href="css/error-styles.css">
+    <script defer src="js/error-system.js"></script>
 
   </head>
-  <body>
-    <div class="concern-main-container">
-      <div class="cmc-head-text">
-        <h2>Student Concern Form</h2>
-        <span>Please fill up the following. Upon submitting your concern, your response will be sent to your submitted email account. <b>You can't edit your concern after submitting.</b> All white fields are required.</span>
+  <body class="dt-base">
+      <div class="concern-main-container">
+        <div class="cmc-head-text">
+          <h1><i class="fas fa-school"></i> BulSU</h1>
+          <h2>Student Concern Form</h2>
+          <p>Please fill up the following. Upon submitting your concern, your response will be sent to your submitted email account. <b>You can't edit your concern after submitting.</b> <br><br>We'll ensure that your concern will reach the higher ups. Thank you for using our service!</p>
+          <p>Registration Number: <br><span class="regno-prev">Test Number</span></p>
+          <button class="dt-btn-second sn-b1">View My Concerns</button>
+          <button class="dt-btn-second sn-b2">Submit a New Concern</button>
+          <button class="dt-btn-tertia mui-def-border-btn sn-b4">Update Concern List</button>
+          <button class="dt-btn-prima sn-b3">Return to Main Page</button>
+        </div>
+        <form id="scf" class="cmc-grid-1 in-opacity" action="javascript:void(0)">
+          <div class="cmc-g-c">
+            <label for="fname">*First Name</label>
+            <input name="fname" type="text" placeholder="First Name" id="cf-fname" required>
+            <label for="mname">*Middle Name</label>
+            <input name="mname" type="text" placeholder="Complete Middle Name (Type null if not applicable)" id="cf-mname" required>
+            <label for="lname">*Last Name</label>
+            <input name="lname" type="text" placeholder="Last Name (Include suffixes, if present, after your Last name)" id="cf-lname" required>
+            <label for="email">*BulSU Email</label>
+            <input name="email" type="email" placeholder="Email (Must be a BulSU email - @BulSU.edu.ph)" id="cf-email" required>
+            <label for="regno">*Registration Number</label>
+            <input name="regno" type="text" placeholder="Registration Number (Your 10-Digit Student Number)" id="cf-cor" maxlength="10" oninput="strictNumber(this.id)" required>
+            <label for="course">*Course</label>
+            <select name="course" type="text" id="cf-cs">
+              <option value="0">Select your course</option>
+              <option value="FM">FM</option>
+              <option value="MM">MM</option>
+              <option value="BE">BE</option>
+              <option value="BSHH">BSHH</option>
+              <option value="BSTM">BSTM</option>
+              <option value="DDGT">DDGT</option>
+              <option value="EXT">EXT</option>
+              <option value="CT">CT</option>
+              <option value="BSIT">BSIT</option>
+              <option value="BSE">BSE</option>
+              <option value="BSED">BSED</option>
+              <option value="BEED">BEED</option>
+            </select>
+            <label for="section">*Section</label>
+            <input name="section" type="text" placeholder="(e.g. 2A, 3B)" id="cf-section" maxlength="2" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
+            <label for="conno">Contact Number</label>
+            <input name="conno" type="text" placeholder="(Optional | eg. 09123456789)" id="cf-cn" maxlength="11" oninput="strictNumber(this.id)">
+          </div>
+          <div class="cmc-g-c">
+            <label for="Concern">*Concern</label>
+            <textarea name="Concern" id="cf-concern" cols="30" rows="10" placeholder="Concern (Minimum of 20 Characters)" required></textarea>
+            <input type="submit" value="Submit Concern" id="cf-submit" class="dt-btn-prima">
+            <input type="button" value="Clear Form" id="cf-dc" class="dt-btn-prima-border-only">
+          </div>
+        </form>
+        
+        <div class="concern-list in-opacity">
+          <div class="concerns-list-grid in-opacity">
+            <div class="concern-item-head">
+              <p><b>Name</b></p>
+              <p><b>Course and Section</b></p>
+              <p><b>Concern ID</b></p>
+            </div>
+            
+          </div>
+          <div class="cl-fetch-screen in-opacity">
+            <p>Fetching concern list. Please wait.</p>
+          </div>
+        </div>
+        
+        <div class="concern-preview-container in-opacity">
+          <h2>Form Submitted</h2>
+          <span>Your concern has been submitted</span><br>
+        </div>
       </div>
-      <form class="cmc-grid-1" action="javascript:void(0)">
-        <div class="cmc-g-c">
-          <input type="text" placeholder="Full Name (Surname, Given Name, Middle Name, Suffix (Use letters))" name="Name" id="cf-name" required>
-          <input type="email" placeholder="Email (Must be a BulSu email - @bulsu.edu.ph)" name="Email" id="cf-email" required>
-          <input type="number" placeholder="COR (Your 9-Digit Registration Number)" name="cor" id="cf-cor" required>
-          <input type="text" placeholder="Course - Section (eg. BSIT - A | whitespace sensitve)" name="cs" id="cf-cs" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
-          <input type="number" placeholder="Contact Number (Optional | eg. 09123456789)" name="cn" id="cf-cn">
+      
+      <div class="concern-text-preview-opac">
+        <div class="concern-text-preview dt-cont-surface">
+          <button class="ctp-close"><i class="fas fa-window-close"></i></button>
+          <p>Form Preview: <span class="ctp-cid">Concern ID</span></p>
+          <hr>
+          <div class="ctp-grid">
+            <div class="ctp-g-basic-info">
+              <div class="ctp-g-bi-container">
+                <p>Name</p>
+                <div>
+                  <span class="ctp-name"></span>
+                </div>
+              </div>
+              <div class="ctp-g-bi-container">
+                <p>Email</p>
+                <div>
+                  <span class="ctp-email"></span>
+                </div>
+              </div>
+              <div class="ctp-g-bi-container">
+                <p>Course and Section</p>
+                <div>
+                  <span class="ctp-cs"><span class="ctp-c"></span> - <span class="ctp-s"></span></span>
+                </div>
+              </div>
+              <div class="ctp-g-bi-container">
+                <p>Contact Number</p>
+                <div>
+                  <span class="ctp-nos"></span>
+                </div>
+              </div>
+            </div>
+            <div class="ctp-g-concern">
+              <p>Concern</p>
+              <div>
+                <p class="ctp-concern">
+                  
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="cmc-g-c">
-          <textarea name="Concern" id="cf-concern" cols="30" rows="10" placeholder="Concern (Minimum of 20 Characters)" required></textarea>
-          <input type="submit" value="Submit Concern" id="cf-submit">
-          <input type="button" value="Discard Changes" id="cf-dc">
-        </div>
-      </form>
-    </div>
-    <div class="concern-preview-container">
-      <h2>Form Submitted</h2>
-      <span>Your concern has been submitted</span><br>
-      <button id="concern-index">Return To Main Page</button>
-    </div>
+      </div>
+      
+    <script type="text/javascript">
+      function strictNumber(id) {
+        let a = document.getElementById(id);
+        a.value = a.value.replace(/[^0-9]/gi, "");
+      }
+    </script>
   </body>
 </html>

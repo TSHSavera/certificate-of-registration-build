@@ -1,0 +1,181 @@
+/*Custom Color Scheme*/
+/*DT Var*/
+:root {
+    --cs-dt-bg-color: #201a1a;
+    --cs-dt-on-bg-color: #ecdfde;
+    --cs-dt-surface: #201a1a;
+    --cs-dt-on-surface: #ecdfde;
+    --cs-dt-surface-variant: #534342;
+    --cs-dt-on-surface-variant: #d7c1c0;
+    --cs-dt-primary: #ffb3b0;
+    --cs-dt-on-primary: #5f1317;
+    --cs-dt-primary-div: #7e2a2c;
+    --cs-dt-on-primary-div: #ffdad7;
+    --cs-dt-secondary: #e6bcba;
+    --cs-dt-on-secondary: #442928;
+    --cs-dt-secondary-div: #5d3f3e;
+    --cs-dt-on-secondary-div: #ffdad8;
+    --cs-dt-tertiary: #e3c18c;
+    --cs-dt-on-tertiary: #412d05;
+    --cs-dt-tertiary-div: #5a4319;
+    --cs-dt-on-tertiary-div: #ffdea7;
+    --cs-dt-error: #ffb4a9;
+    --cs-dt-on-error: #680003;
+    --cs-dt-error-div: #930006;
+    --cs-dt-on-error-div: #ffdad4;
+    --cs-dt-outline: #9f8c8b;
+    --cs-dt-neutral-div: #655C5B;
+    /*Additionals*/
+    --cs-dt-sidenav: #362525;
+    --cs-dt-on-sidenav: #ecdfde;
+    /*Adjustments*/
+    --cs-dt-prima-btn-hover: #5e2526;
+    --cs-dt-prima-btn-hover-txt: #ffdad7;
+    --cs-dt-second-btn-hover: #53302f;
+    --cs-dt-second-btn-hover-txt: #ffdad8;
+    --cs-dt-tertia-btn-hover: #4f3505;
+    --cs-dt-tertia-btn-hover-txt: #ffdea7;
+    --cs-dt-cont-btn-surface-hover: #45302f;
+    --cs-dt-cont-btn-surface-hover-txt: #d7c1c0;
+
+    --cs-dt-trans: transparent;
+}
+
+
+/*DT Styles*/
+.dt-base {
+    background-color: var(--cs-dt-bg-color);
+    color: var(--cs-dt-on-bg-color);
+}
+/*Containers*/
+
+.dt-cont-prima {    
+    background-color: var(--cs-dt-primary);
+    color: var(--cs-dt-on-primary);
+}
+.dt-cont-second {
+    background-color: var(--cs-dt-secondary);
+    color: var(--cs-dt-on-secondary);
+}
+.dt-cont-tertiary {
+    background-color: var(--cs-dt-tertiary);
+    color: var(--cs-dt-on-tertiary);
+}
+.dt-cont-surface {
+    background-color: var(--cs-dt-surface-variant);
+    color: var(--cs-dt-on-surface-variant);
+}
+.dt-cont-neutral {
+    background-color: var(--cs-dt-neutral-div);
+    color: var(--cs-dt-on-bg-color);
+}
+
+/*Cont on Cont*/
+.dt-cc-prima {
+    background-color: var(--cs-dt-primary-div);
+    color: var(--cs-dt-on-primary-div);
+}
+.dt-cc-second {
+    background-color: var(--cs-dt-secondary-div);
+    color: var(--cs-dt-on-secondary-div);
+}
+.dt-cc-tertiary {
+    background-color: var(--cs-dt-tertiary-div);
+    color: var(--cs-dt-on-tertiary-div);
+}
+
+
+
+/*Accent*/
+.dt-acc-prima {
+    background-color: var(--cs-dt-primary);
+    color: var(--cs-dt-on-primary);
+}
+
+.dt-acc-error {
+    background-color: var(--cs-dt-error);
+    color: var(--cs-dt-on-error);
+}
+.dt-acc-cc-error {
+    background-color: var(--cs-dt-error-div);
+    color: var(--cs-dt-on-error-div);
+}
+
+.dt-cont-sidenav {
+    background-color: var(--cs-dt-sidenav);
+    color: var(--cs-dt-on-sidenav);
+}
+
+/*Effects*/
+.dt-input:active, .dt-input:focus {
+    outline: var(--cs-dt-outline);
+}
+.sn-btn:hover, .sn-btn-active {
+    background-color: var(--cs-dt-secondary);
+    color: var(--cs-dt-on-secondary)
+}
+
+/*Button*/
+.dt-btn-prima {
+    background-color: var(--cs-dt-primary-div);
+    color: var(--cs-dt-on-primary-div);
+}
+.dt-btn-second {
+    background-color: var(--cs-dt-secondary-div);
+    color: var(--cs-dt-on-secondary-div);
+}
+.dt-btn-tertia {
+    background-color: var(--cs-dt-tertiary-div);
+    color: var(--cs-dt-on-tertiary-div);
+}
+.dt-btn-prima-border-only {
+    background-color: var(--cs-dt-trans);
+    color: var(--cs-dt-on-primary-div);
+    border-color: var(--cs-dt-primary);
+}
+.dt-btn-cont-surface {
+    background-color: var(--cs-dt-surface-variant);
+    color: var(--cs-dt-on-surface-variant);
+}
+
+.dt-btn-prima:hover, .dt-btn-prima-border-only:hover {
+    background-color: var(--cs-dt-prima-btn-hover);
+    color: var(--cs-dt-prima-btn-hover-txt);
+}
+.dt-btn-second:hover, .dt-btn-second-border-only:hover {
+    background-color: var(--cs-dt-second-btn-hover);
+    color: var(--cs-dt-second-btn-hover-txt);
+}
+.dt-btn-tertia:hover, .dt-btn-tertia-border-only:hover {
+    background-color: var(--cs-dt-tertia-btn-hover);
+    color: var(--cs-dt-tertia-btn-hover-txt);
+}
+.dt-btn-cont-surface {
+    background-color: var(--cs-dt-surface-variant);
+    color: var(--cs-dt-on-surface-variant);
+}
+.dt-btn-cont-surface:hover {
+    background-color: var(--cs-dt-cont-btn-surface-hover);
+    color: var(--cs-dt-cont-btn-surface-hover-txt);
+}
+
+/*Extras*/
+.mui-def-btn {
+    padding: 1em;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-family: "Montserrat", sans-serif;
+}
+.mui-def-border-btn {
+    padding: 1em;
+    border-radius: 20px;
+    border: 1px solid;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-family: "Montserrat", sans-serif;
+}
+

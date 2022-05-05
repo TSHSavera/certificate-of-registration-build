@@ -25,7 +25,7 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore(app);
 
-
+/*
 //Variables
 let btn_s = document.querySelector("#btn-s");
 let btn_f = document.querySelector("#btn-f");
@@ -67,6 +67,8 @@ function st(n) {
     }
 }
 
+Deprecated
+*/
 
 //Realtime Auth Listener
 onAuthStateChanged(auth, user => {
@@ -78,13 +80,26 @@ onAuthStateChanged(auth, user => {
     }
   })
 
-//Login Admin Account
-var loginEmail = document.getElementById("login-username");
-var loginPass = document.getElementById("login-password");
-let l_btn = document.getElementById("l-fl-btn");
+//Login Faculty Account
+var loginEmail = document.getElementById("fie");
+var loginPass = document.getElementById("fip");
+let l_btn = document.querySelector(".login-faculty-btn");
 //Event Listener
 l_btn.addEventListener("click", function() {
-    loginAdminAccount();
+    if(loginEmail.value != "" && loginEmail.value != undefined && loginEmail.value != null) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginEmail.value)) {
+        if(loginPass.value.length >= 6) {
+          l_btn.classList.toggle('active');
+          setTimeout(loginAdminAccount, 4800);
+        } else {
+          createCustomNotice("Password is too short, please try again.");
+        }
+      } else {
+        createCustomNotice("Invalid email, please provide a valid one.")
+      }
+    } else {
+      createCustomNotice("Email form is empty!");
+    }
 })
 
 
@@ -100,7 +115,6 @@ function loginAdminAccount() {
         const regEmail = user.email;
         const regUid = user.uid;
         console.log(user);
-        alert("Successful Login!");
         pushAdminData();
         //Push to local storage
         localStorage.setItem("username", regEmail);
@@ -111,7 +125,8 @@ function loginAdminAccount() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode + " - " + errorMessage);
-        openAlert()
+        let errorTitle = error.code.substring(5);
+        createCustomError(errorTitle, errorCode, errorMessage)
       })
     } else {
       alert("Password must be atleast 6 characters");
@@ -143,16 +158,26 @@ async function checkAdminData() {
 }
 //Additional Features
 //Get Redirect Code to give messages to user
+//Error Lists
+const aunauth001 = {
+  error_title: "Unauthorized",
+  error_code: "ECOR001",
+  error_description: "You must be authorized to continue"
+}
+const aunauthadmin002 = {
+  error_title: "Forbidden",
+  error_code: "ECOR002",
+  error_description: "You're accessing a prohibited page"
+}
+
 function checkForParams() {
   var a = getAllUrlParams().rdrc;
-  var b = document.getElementById("f-text");
   if (a === undefined) {
     console.log("No redirect code");
-    b.innerHTML = "";
   } else if (a == "aunauth") {
-    b.innerHTML = "You must be authorized to continue";
+    createCustomError(aunauth001.error_title, aunauth001.error_code, aunauth001.error_description);
   } else if (a == "aunauthadmin") {
-    b.innerHTML = "You're accessing a prohibited page. Your account might get locked if you continue to access it.";
+    createCustomError(aunauthadmin002.error_title, aunauthadmin002.error_code, aunauthadmin002.error_description);
   } else if (a == "csub") {
     b.innerHTML = "Thank you for using our service";
   } else if (a == "authadminreg") {
@@ -166,43 +191,34 @@ checkForParams();
 
 
 //Student Form
-let proceedBtn = document.getElementById("p-sf-btn");
+let proceedBtn = document.querySelector(".login-stud-btn");
 function proceedToConcerns() {
-    let a = document.getElementById("email");
-    let b = document.getElementById("cor");
-
-    if (/@bulsu.edu.ph\s*$/.test(a.value)) {
-        if (b.value.length == 9 ) {
-            localStorage.setItem("subEmail", a.value);
-            localStorage.setItem("subCor", b.value);
-            let c = localStorage.getItem("subEmail");
-            let d = localStorage.getItem("subCor");
-            //Go to concerns dashboard
-            window.location.href = "concern.html?es=" + c + "&rn=" + d;
+    let a = document.getElementById("sie");
+    let b = document.getElementById("sip");
+    let c = document.querySelector(".login-stud-btn");
+    if(a.value != "" && a.value != undefined && a.value != null) {
+      if (/@bulsu.edu.ph\s*$/.test(a.value)) {
+        if (b.value.length == 10) {
+            c.classList.toggle('active');
+            setTimeout(() => {
+              localStorage.setItem("subEmail", a.value);
+              localStorage.setItem("subCor", b.value);
+              let c = localStorage.getItem("subEmail");
+              let d = localStorage.getItem("subCor");
+              //Go to concerns dashboard
+              window.location.href = "concern.html?es=" + c + "&rn=" + d;
+            }, 5250);
         } else {
-            alert("Invalid registration number, please provide a valid one.")
+            createCustomNotice("Invalid registration number, please provide a valid one.")
         }
     } else {
-        alert("Invalid email, please provide a BulSu domain email.")
-    }   
+        createCustomNotice("Invalid email, please provide a BulSU domain email.")
+    }
+  } else {
+    createCustomNotice("Email must not be empty");
+  }   
 }
 
 proceedBtn.addEventListener("click", proceedToConcerns);
 
-//Read page index
-function readPageIndex() {
-  let a = getAllUrlParams().pi;
-  if (a === undefined) {
-    console.log("No page index. Default loaded");
-  } else if (a == "a") {
-    st("a");
-  } else if (a == "b") {
-    st("b");
-  } else if (a == "c") {
-    st("c");
-  } else {
-    alert("Invalid parameter passed!");
-  }
-}
-
-readPageIndex();
+createCustomNotice("Login on enter disabled due to security issues");
