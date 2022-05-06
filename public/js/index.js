@@ -181,7 +181,7 @@ function checkForParams() {
   } else if (a == "csub") {
     b.innerHTML = "Thank you for using our service";
   } else if (a == "authadminreg") {
-    b.innerHTML == "Admin account creation successful. Please re-login to continue";
+    createCustomNotice("Admin account creation successful. Please re-login to continue");
   } else {
     alert("Invalid parameter passed!");
     console.log(a);

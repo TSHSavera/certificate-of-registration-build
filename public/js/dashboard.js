@@ -78,19 +78,7 @@ function clearData() {
     localStorage.removeItem("username");
 }
 
-//Progress Bar anim
-const numb = document.querySelector(".number");
-let counter = 0;
-setInterval(() => {
-  for(var i = 0; i < numb.length; i++) {
-    if(counter == 100 ){
-        clearInterval();
-      }else{
-        counter+=1;
-        numb[i].textContent = counter + "%";
-      }
-  }
-}, 15);
+
 
 //Set Data End
 
@@ -113,67 +101,36 @@ let btns = {
     bas: document.getElementById("btn-as"),
 };
 
-btns.bov.addEventListener("click", function () {updateState(1);});
-btns.bcc.addEventListener("click", function () {updateState(2);});
-btns.badmn.addEventListener("click", function () {updateState(3);});
-btns.bas.addEventListener("click", function () {updateState(4);});
+
+btns.bcc.addEventListener("click", function () {updateState(1);});
+btns.badmn.addEventListener("click", function () {updateState(2);});
+
 
 let ds;
 
 function updateState(n) {
-    let a = document.querySelector(".overview");
-    let b = document.querySelector(".concerns");
-    let c = document.querySelector(".admin");
-    let d = document.querySelector(".settings");
+    let a = document.querySelector(".concerns");
+    let b = document.querySelector(".admin");
     if (n == 1) {
         //Change views
         a.style.display = "block";
         b.style.display = "none";
-        c.style.display = "none";
-        d.style.display = "none";
         //Update Buttons
-        btns.bov.classList.add("sn-btn-active");
-        btns.bcc.classList.remove("sn-btn-active");
+        btns.bcc.classList.add("sn-btn-active");
         btns.badmn.classList.remove("sn-btn-active");
-        btns.bas.classList.remove("sn-btn-active");
         //Call Change Title - Change cttv first
-        cttv = "Overview";
+        cttv = "Concerns";
         ctt(cttv);
     }
     else if (n == 2) {
         a.style.display = "none";
         b.style.display = "block";
-        c.style.display = "none";
-        d.style.display = "none";
-        btns.bov.classList.remove("sn-btn-active");
-        btns.bcc.classList.add("sn-btn-active");
-        btns.badmn.classList.remove("sn-btn-active");
-        btns.bas.classList.remove("sn-btn-active");
-        cttv = "Concerns";
-        ctt(cttv);
-    }
-    else if (n == 3) {
-        a.style.display = "none";
-        b.style.display = "none";
-        c.style.display = "block";
-        d.style.display = "none";
-        btns.bov.classList.remove("sn-btn-active");
+
+
         btns.bcc.classList.remove("sn-btn-active");
         btns.badmn.classList.add("sn-btn-active");
-        btns.bas.classList.remove("sn-btn-active");
+
         cttv = "Admin";
-        ctt(cttv);
-    }
-    else if (n == 4) {
-        a.style.display = "none";
-        b.style.display = "none";
-        c.style.display = "none";
-        d.style.display = "block";
-        btns.bov.classList.remove("sn-btn-active");
-        btns.bcc.classList.remove("sn-btn-active");
-        btns.badmn.classList.remove("sn-btn-active");
-        btns.bas.classList.add("sn-btn-active");
-        cttv = "Settings";
         ctt(cttv);
     }
     else {

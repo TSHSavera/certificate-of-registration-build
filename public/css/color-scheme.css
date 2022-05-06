@@ -38,6 +38,7 @@
     --cs-dt-cont-btn-surface-hover: #45302f;
     --cs-dt-cont-btn-surface-hover-txt: #d7c1c0;
 
+    --cs-dt-primary-border: #7e2a2c;
     --cs-dt-trans: transparent;
 }
 
@@ -131,7 +132,7 @@
 .dt-btn-prima-border-only {
     background-color: var(--cs-dt-trans);
     color: var(--cs-dt-on-primary-div);
-    border-color: var(--cs-dt-primary);
+    border: 1px solid var(--cs-dt-primary-border)!important;
 }
 .dt-btn-cont-surface {
     background-color: var(--cs-dt-surface-variant);

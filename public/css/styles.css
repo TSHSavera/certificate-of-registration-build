@@ -87,7 +87,7 @@ input, select {
   height: 80%;
   background-color: #EEEBDD;
   color: #810000;
-  border-radius: 10px;
+  border-radius: 20px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 5fr 1fr;
@@ -109,7 +109,7 @@ input, select {
     cursor: pointer;
     padding: 1em;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #810000;
     color: #EEEBDD;
   }
@@ -128,7 +128,7 @@ input, select {
   }
   #ia-2-form input {
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 1em;
   }
 
@@ -146,7 +146,7 @@ input, select {
   }
   #ia-3-form input {
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 1em;
   }
 .footer {
@@ -213,16 +213,13 @@ input, select {
       .u-n-btn {
         background-color: transparent;
         border: none;
-        border-radius: 10px;
+        border-radius: 20px;
         cursor: pointer;
         align-self: center;
         justify-self: end;
         padding: 0.5em;
         color: #ecdfde;
         transition: all 0.5s;
-      }
-      .u-n-btn:hover, .u-info:hover {
-        color: #b33030;
       }
     .u-prof {
       display: grid;
@@ -232,13 +229,13 @@ input, select {
     }
     .u-info {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 3fr;
       grid-template-rows: 1fr;
       align-items: center;
       justify-items: center;
       background-color: transparent;
       border: none;
-      border-radius: 10px;
+      border-radius: 20px;
       cursor: pointer;
       padding: 0.5em;
       color: #ecdfde;
@@ -289,7 +286,7 @@ input, select {
       }
       .ub-btn {
         width: 100%;
-        border-radius: 10px;
+        border-radius: 20px;
         border: none;
         padding: 1em;
         cursor: pointer;
@@ -315,7 +312,7 @@ input, select {
     .data-1-grid .d1-g {
       padding: 1em;
       border: 2px solid #810000;
-      border-radius: 10px;
+      border-radius: 20px;
     }
 
     .d1-g .d1-g-g{
@@ -423,7 +420,7 @@ input, select {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       /*border: 2px solid #630000;*/
       border:none;
-      border-radius: 10px;
+      border-radius: 20px;
     }
       .d2-t-h {
         border-radius: 0px;
@@ -482,7 +479,7 @@ input, select {
       .d3-g-f-r-d input {
         width: 100%;
         padding: 1em;
-        border-radius: 10px;
+        border-radius: 20px;
         border: none;
       }
       .d3-g-f-r-d input:disabled, .d3-g-f-r-b textarea:disabled {
@@ -501,11 +498,11 @@ input, select {
         #pv-concern {
           resize: none;
           width: 100%;
-          border-radius: 10px;
+          border-radius: 20px;
         }
       .d3-g-item {
         padding: 1em;
-        border-radius: 10px;
+        border-radius: 20px;
         font-size: 12px;
         cursor: pointer;
         transition: all 0.5s;
@@ -534,26 +531,35 @@ input, select {
   }
     .data-4-grid {
       display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 2em;
+    }
+    .d4-g-s {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 2em;
     }
-    .lcsn-form {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      grid-gap: 1em;
+    .d4-g-uc-btn {
+      position: relative;   
+    }
+    .d4-g-uc-btn button {
       margin-top: 1em;
     }
-    .lcsn-form input {
-      padding: 1em;
-      border: none;
-      border-radius: 10px;
-      transition: all 0.5s;
+    .d4-g-uc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2em;
+      margin-top: 1em;
     }
-    .lcsn-form input[type="button"] {
-      background-color: #810000;
-      color: #EEEBDD;
+    input[type="file"] {
+      position: fixed;
+      right: 100%;
+      bottom: 100%;
+    }
+    .custom-file-upload {
+      display: inline-block;
       cursor: pointer;
+      text-align: center;
     }
     .caa-form {
       display: grid;
@@ -568,12 +574,10 @@ input, select {
     .caa-form input {
       padding: 1em;
       width: 100%;
-      border-radius: 10px;
+      border-radius: 20px;
       border: none;
     }
     .caa-form input[type="button"] {
-      background-color: #810000;
-      color: #EEEBDD;
       cursor: pointer;
     }
 
@@ -602,33 +606,20 @@ input, select {
     margin-top: 1em;
   }
   .sc-form input[type="button"] {
-    background-color: #810000;
-    color: #EEEBDD;
     cursor: pointer;
   }
   .sc-form input {
     padding: 1em;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
     border: none;
   }
    
-  .rsi-form {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
-    grid-gap: 1em;
-    margin-top: 1em;
-  }
-  .rsi-form input[type="button"] {
-    background-color: #810000;
-    color: #EEEBDD;
-    cursor: pointer;
-  }
+  
   .rsi-form input {
     padding: 1em;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
     border: none;
   }
 
@@ -640,22 +631,17 @@ input, select {
     margin-top: 1em;
   }
   .scorn-form input[type="button"] {
-    background-color: #810000;
-    color: #EEEBDD;
     cursor: pointer;
   }
   .scorn-form input {
     padding: 1em;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
     border: none;
   }
 
   input[type="button"] {
     transition: all 0.5s;
-  }
-  .scorn-form input[type="button"]:hover {
-    background-color: #630000;
   }
 
   .settings {
@@ -695,7 +681,7 @@ input, select {
   width: 30%;
   background-color: #ede3bd;
   color: #810000;
-  border-radius: 10px;
+  border-radius: 20px;
   z-index: 6;
   padding: 1em;
   display: none;
@@ -762,7 +748,7 @@ input, select {
   .cmc-g-c {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
     text-align: left;
   }
@@ -908,7 +894,7 @@ input, select {
       height: 100%;
       overflow-y: auto;
     }
-    .ctp-close, .cpp-close, .flp-close {
+    .ctp-close, .cpp-close, .flp-close, .dl-close {
       background-color: transparent;
       color: #ffdad4;
       border: none;
@@ -943,6 +929,9 @@ input, select {
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
       margin-left: 1em;
+    }
+    .update-cl:disabled, .filters-cl:disabled {
+      cursor: not-allowed;
     }
 
 
@@ -1051,7 +1040,7 @@ input, select {
     grid-template-rows: 1fr 1fr;
     align-items: flex-start;
   }
-  .cpp-g-c-d-item div{
+  .cpp-g-c-d-item div, .ctp-g-bi-container div{
     padding: 1em;
     background-color: #201a1a;
     color: #ecdfde;
@@ -1093,11 +1082,16 @@ input, select {
     width: 50%;
     height: 70%;
     border-radius: 20px;
+    overflow-y: auto;
+    
   }
   .flp-head {
     border-radius: 20px 20px 0 0;
     padding: 1em;
     font-weight: 700;
+    position: sticky;
+    top: 0;
+    left: 0;
   }
   .flp-grid {
     display: grid;
@@ -1129,4 +1123,23 @@ input, select {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     grid-gap: 0.5em;
+  }
+
+  .data-lookup-opac {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 7;
+  }
+  .data-lookup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+    padding: 1em;
   }
