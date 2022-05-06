@@ -1,34 +1,38 @@
-/*Animation.css*/
-
-/*Classes*/
-.an-fi {
-    animation: fi 0.5s ease-in;
+/*Animations*/
+.slide-in-right {
+    animation: sir 0.5s ease-out;
 }
-.an-sid {
-    animation: sid 0.5s;
+.slide-in-left-2 {
+    animation: Asil 0.5s ease-in-out;
 }
-.an-sou {
-    animation: sou 0.5s;
+.slide-in-up {
+    animation: Asiu 0.5s ease-in-out;
 }
-.an-sil-a {
-    animation: sil-a 0.5s;
+.slide-in-down-info {
+    animation: sidi 0.5s ease-in-out;
 }
-
+.in-opacity {
+    animation: iopac 0.5s ease-in-out;
+}
 
 /*Keyframes*/
-@keyframes fi {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+@keyframes sir {
+    from {left: 100px; opacity: 0;}
+    to {left: 0px; opacity: 1;}
 }
-@keyframes sid {
-    0% {opacity: 0; top: -300px}
-    100% {opacity: 1; top: 60px;}
+@keyframes Asil {
+    from {margin-left: -100px; opacity: 0;}
+    to {margin-right: 0; opacity: 1;}
 }
-@keyframes sou {
-    0% {opacity: 1; top:60px}
-    100% {opacity: 0; top: -300px}
+@keyframes Asiu {
+    from {margin-bottom: -300px; opacity: 0;}
+    to {margin-bottom: 0; opacity: 1}
 }
-@keyframes sil-a {
-    0% {opacity: 0; left: -300px}
-    100% {opacity: 1; left: 2%;}
+@keyframes sidi {
+    from {margin-top: -200px; opacity: 0;}
+    to {margin-top: 0; opacity: 1}
+}
+@keyframes iopac {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
